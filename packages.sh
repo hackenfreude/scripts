@@ -11,9 +11,6 @@ sudo apt-get install linux-generic -y
 sudo apt-get install linux-headers-generic -y
 sudo apt-get install linux-image-generic -y
 
-echo 'autoremove'
-sudo apt-get autoremove -y
-
 echo 'remove unneeded packages'
 sudo apt-get remove deja-dup -y
 sudo apt-get remove gnome-bluetooth -y

@@ -11,6 +11,11 @@ sudo apt-get install linux-generic -y
 sudo apt-get install linux-headers-generic -y
 sudo apt-get install linux-image-generic -y
 
+echo 'add other kept-back packages'
+sudo apt-get install liboxideqt-qmlplugin -y
+sudo apt-get install python-cupshelpers -y
+sudo apt-get install system-config-printer-gnome -y
+
 echo 'remove unneeded packages'
 sudo apt-get remove deja-dup -y
 sudo apt-get remove gnome-bluetooth -y

@@ -37,6 +37,10 @@ sudo apt-get remove unity-webapps-common -y
 echo 'autoremove'
 sudo apt-get autoremove -y
 
+echo 'check for anything else kept back'
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
 #TODO:
 #get sudo perms at beginning
 

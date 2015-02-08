@@ -5,3 +5,5 @@ wget https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/do
 
 #give execute permissions
 chmod -R +x scripts/
+
+./basicupdate.sh tee basicupdate.log

@@ -6,4 +6,4 @@ wget -i https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master
 #give execute permissions
 chmod -R +x scripts/
 
-./scripts/packages.sh tee packages.log
+./scripts/packages.sh | tee packages.log

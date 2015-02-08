@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/basicupdate.sh

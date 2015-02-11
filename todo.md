@@ -1,0 +1,4 @@
+- [] add keys for other repos
+- [] replace default sources w/ up-to-date packages
+- [] setup SSH
+- [] setup VNC

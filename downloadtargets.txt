@@ -1,1 +1,2 @@
 https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/packages.sh
+https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/user.sh

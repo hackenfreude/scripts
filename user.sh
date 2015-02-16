@@ -6,4 +6,4 @@ echo 'adding user ' $1
 
 sudo useradd -m $1
 
-sudo passwd -e $1
+sudo passwd $1

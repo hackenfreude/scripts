@@ -2,4 +2,5 @@
 - [ ] replace default sources w/ up-to-date packages
 - [ ] setup SSH
 - [ ] setup VNC
+- [ ] add readme.md
 

@@ -22,3 +22,6 @@ sudo apt-get autoclean -y
 echo 'check for anything else kept back'
 sudo apt-get update -y
 sudo apt-get upgrade -y
+
+echo 'install additional packages'
+sudo apt-get install git vim -y

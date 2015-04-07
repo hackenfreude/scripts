@@ -25,3 +25,6 @@ sudo apt-get upgrade -y
 
 echo 'install additional packages'
 sudo apt-get install git vim -y
+
+echo 'install virtualbox guest additions'
+sudo apt-get install virtualbox-guest-dkms -y

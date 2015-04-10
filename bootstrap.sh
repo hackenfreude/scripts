@@ -7,3 +7,4 @@ wget -i https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master
 chmod -R +x scripts/
 
 ./scripts/packages.sh | tee packages.log
+./scripts/settings.sh | tee settings.log

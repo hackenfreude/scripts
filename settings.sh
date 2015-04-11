@@ -3,3 +3,5 @@
 echo "turn off online search results"
 /usr/bin/gsettings set com.canonical.Unity.Lenses remote-content-search none
 
+echo "turn on firewall"
+sudo ufw enable

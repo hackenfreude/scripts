@@ -13,13 +13,17 @@ INSTALLED_VBOX_COUNT=$(dpkg --get-selections $WANTED_VBOX_PKG | grep -c -e '\bin
 if [[ $CURRENT_VER == $SUPPORTED_VER || $INSTALLED_VBOX_COUNT == $EXPECTED_VBOX_COUNT ]]; then
 		
 	#remove scripts from prior runs if it exists
-	rm -rf scripts/
+	rm -r -f scripts/
 	
 	#use list of download targets to get all the scripts
 	wget -i https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt -P scripts
 	
 	#give execute permissions
 	chmod -R +x scripts/
+	
+	#remove log files from prior runs
+	rm -f packages.log
+	rm -f settings.log
 	
 	#run each component and log output	
 	./scripts/packages.sh | tee packages.log

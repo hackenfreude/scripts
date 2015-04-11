@@ -1,6 +1,6 @@
 - [x] add readme.md
-- [ ] figure out gsettings
+- [x] figure out gsettings
 - [ ] add user to toolbar
-- [ ] remove scripts before each run
-- [ ] figure out version sequencing for virtualbox
-
+- [x] remove scripts before each run
+- [x] figure out version sequencing for virtualbox
+- [ ] check for sudo in bootstrap

@@ -16,7 +16,7 @@ if [[ $CURRENT_VER == $SUPPORTED_VER || $INSTALLED_VBOX_COUNT == $EXPECTED_VBOX_
 	rm -r -f scripts/
 	
 	#use list of download targets to get all the scripts
-	wget -i https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt -P scripts
+	wget -i https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt -P scripts -nv
 	
 	#give execute permissions
 	chmod -R +x scripts/

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #first check the version
-CURRENT = $(lsb_release -ds)
-SUPPORTED = "Ubuntu 14.04.1 LTS"
+CURRENT=$(lsb_release -ds)
+SUPPORTED="Ubuntu 14.04.1 LTS"
 
 if [[ $CURRENT == $SUPPORTED ]]; then
 	

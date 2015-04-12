@@ -9,3 +9,7 @@ rm -f bootstrap.sh
 
 wget -nv https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/bootstrap.sh
 
+chmod +x bootstrap.sh
+
+./bootstrap.sh
+

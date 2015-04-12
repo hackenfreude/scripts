@@ -5,5 +5,7 @@ if [ $(id -u) == 0 ]; then
 	exit 1
 fi
 
+rm -f bootstrap.sh
+
 wget -nv https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/bootstrap.sh
 

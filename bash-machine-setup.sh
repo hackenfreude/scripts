@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 if [[ $(id --user) == 0 ]]
 then
@@ -13,4 +13,12 @@ wget --no-verbose https://raw.githubusercontent.com/hackenfreude/bash-machine-se
 chmod +x bootstrap.sh
 
 ./bootstrap.sh
+ret_code=$?
+
+if [[ $ret_code == 0 ]]
+then
+	echo 'Machine setup ran successfully!'
+else
+	echo 'Machine setup had errors; check the logs.'
+fi
 

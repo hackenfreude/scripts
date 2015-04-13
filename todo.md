@@ -6,3 +6,4 @@
 - [x] check for sudo in bootstrap
 - [x] make bootstrapper simpler to always get updated versions
 - [ ] omit download targets from chmod
+- [ ] figure out better handling of virtualbox/version check

@@ -5,4 +5,4 @@
 - [x] figure out version sequencing for virtualbox
 - [x] check for sudo in bootstrap
 - [x] make bootstrapper simpler to always get updated versions
-
+- [ ] omit download targets from chmod

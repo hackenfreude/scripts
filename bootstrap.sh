@@ -20,12 +20,14 @@ chmod --recursive +x scripts/
 
 ./scripts/packages.sh | tee packages.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
+then
 	echo 'packages.sh failed. Please check packages.log'
 	exit 1
 fi
 
 ./scripts/settings.sh | tee settings.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
+then
 	echo 'settings.sh failed. Please check settings.log'
 	exit 1
 fi

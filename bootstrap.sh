@@ -33,5 +33,10 @@ then
 fi
 
 ./scripts/clojure.sh | tee clojure.log
+if [[ ${PIPESTATUS[0]} != 0 ]]
+then
+	echo 'clojure.sh failed. Please check clojure.log'
+	exit 1
+fi
 
 exit 0

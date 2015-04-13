@@ -7,9 +7,7 @@ then
 fi
 
 rm --force bootstrap.sh
-
 wget --no-verbose https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/bootstrap.sh
-
 chmod +x bootstrap.sh
 
 ./bootstrap.sh

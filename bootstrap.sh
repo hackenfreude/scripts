@@ -1,34 +1,34 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SUPPORTED_VER="Ubuntu 14.04.1 LTS"
-WANTED_VBOX_PKG="virtualbox-guest-*"
-EXPECTED_VBOX_COUNT=3
+supported_clean_ubuntu_version='Ubuntu 14.04.1 LTS'
+virtualbox_guest_package_search_term='virtualbox-guest-*'
+expected_virtualbox_guest_installed_package_count=3
 
-#read the current version
-CURRENT_VER=$(lsb_release -ds)
+current_ubuntu_version="$(lsb_release --short --description)"
+installed_virtualbox_guest_package_count=$(dpkg --get-selections "$virtualbox_guest_package_search_term" | grep --count --word-regexp 'install')
 
-#check installed virtualbox packages
-INSTALLED_VBOX_COUNT=$(dpkg --get-selections $WANTED_VBOX_PKG | grep -c -e '\binstall')
-
-if [[ $CURRENT_VER == $SUPPORTED_VER || $INSTALLED_VBOX_COUNT == $EXPECTED_VBOX_COUNT ]]; then
-		
-	#remove scripts from prior runs if it exists
-	rm -r -f scripts/
-	
-	#use list of download targets to get all the scripts
-	wget -i https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt -P scripts -nv
-	
-	#give execute permissions
-	chmod -R +x scripts/
-	
-	#remove log files from prior runs
-	rm -f packages.log
-	rm -f settings.log
-	
-	#run each component and log output	
-	./scripts/packages.sh | tee packages.log
-	./scripts/settings.sh | tee settings.log
-
-else
-	echo "You are on $CURRENT_VER. This script only works with $SUPPORTED_VER due to Virtualbox compatability issues."
+#virtualbox and xorg compatibility are handled with this kludge: if guest additions are already installed, assume all is well. Otherwise, only work with 14.04.1
+if [[ "$current_ubuntu_version" != "$supported_clean_ubuntu_version" && $installed_virtualbox_guest_package_count != $expected_virtualbox_guest_installed_package_count ]]
+then
+	echo 'You are on "$current_ubuntu_version". This script only works with "$supported_clean_ubuntu_version" due to Virtualbox compatability issues.'
+	exit 1
 fi
+
+rm --recursive --force scripts/
+wget --input-file https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt --directory-prefix scripts --no-verbose
+chmod --recursive +x scripts/
+
+./scripts/packages.sh | tee packages.log
+if [[ ${PIPESTATUS[0]} != 0 ]]
+	echo 'packages.sh failed. Please check packages.log'
+	exit 1
+fi
+
+./scripts/settings.sh | tee settings.log
+if [[ ${PIPESTATUS[0]} != 0 ]]
+	echo 'settings.sh failed. Please check settings.log'
+	exit 1
+fi
+
+exit 0
+

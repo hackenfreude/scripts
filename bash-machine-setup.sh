@@ -16,9 +16,5 @@ ret_code=$?
 if [[ $ret_code == 0 ]]
 then
 	echo 'Machine setup ran successfully!'
-	exit 0
-else
-	echo 'Machine setup had errors; check the logs.'
-	exit 1
 fi
 

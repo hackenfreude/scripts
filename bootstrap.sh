@@ -10,7 +10,7 @@ installed_virtualbox_guest_package_count=$(dpkg --get-selections "${virtualbox_g
 #virtualbox and xorg compatibility are handled with this kludge: if guest additions are already installed, assume all is well. Otherwise, only work with 14.04.1
 if [[ "${current_ubuntu_version}" != "${supported_clean_ubuntu_version}" && $installed_virtualbox_guest_package_count != $expected_virtualbox_guest_installed_package_count ]]
 then
-	echo 'You are on $current_ubuntu_version. This script only works with $supported_clean_ubuntu_version due to Virtualbox compatability issues.'
+	echo "You are on $current_ubuntu_version. This script only works with $supported_clean_ubuntu_version due to Virtualbox compatability issues."
 	exit 1
 fi
 

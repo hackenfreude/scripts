@@ -32,5 +32,6 @@ then
 	exit 1
 fi
 
-exit 0
+./scripts/clojure.sh | tee clojure.log
 
+exit 0

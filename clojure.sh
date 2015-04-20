@@ -8,8 +8,8 @@ wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein --d
 chmod +x ~/bin/lein
 ~/bin/lein
 lein_return=$?
-if [[ $lein_return == 0 ]]
-then
-	export PATH=$PATH:$HOME/bin
-fi
+#if [[ $lein_return == 0 ]]
+#then
+#	export PATH=$PATH:$HOME/bin
+#fi
 exit $lein_return

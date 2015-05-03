@@ -15,6 +15,7 @@ ret_code=$?
 
 if [[ $ret_code == 0 ]]
 then
-	echo 'Machine setup ran successfully!'
+	echo 'Machine setup ran successfully... forcing bash to reload to pick up $PATH changes'
+	exec -l bash
 fi
 

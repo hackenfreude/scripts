@@ -8,3 +8,4 @@
 - [ ] omit download targets from chmod
 - [x] figure out better handling of virtualbox/version check
 - [x] figure out path for clojure
+- [ ] add vimrc

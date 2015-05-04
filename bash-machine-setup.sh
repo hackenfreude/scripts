@@ -15,7 +15,9 @@ ret_code=$?
 
 if [[ $ret_code == 0 ]]
 then
-	echo 'Machine setup ran successfully... forcing bash to reload to pick up $PATH changes'
+	echo 'Machine setup ran successfully.'
+	echo 'Note that a full reboot is needed to make $PATH changes permanent'
+	echo 'Until then, force bash to reload to pick up $PATH changes by invoking \"exec -l bash"'
 	exec -l bash
 fi
 

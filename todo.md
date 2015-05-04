@@ -9,3 +9,4 @@
 - [x] figure out better handling of virtualbox/version check
 - [x] figure out path for clojure
 - [ ] add vimrc
+- [ ] implement better folder structure

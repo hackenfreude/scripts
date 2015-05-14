@@ -2,6 +2,6 @@
 
 kept_back_packages=$(sudo apt-get upgrade -s | sed -n '/back:/,/upgraded./p' | sed '1d;$d')
 
-echo $kept_back_packages
+#echo $kept_back_packages
 
-
+sudo apt-get install $kept_back_packages -y

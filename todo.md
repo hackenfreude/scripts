@@ -10,3 +10,6 @@
 - [x] figure out path for clojure
 - [ ] add vimrc
 - [ ] implement better folder structure
+- [ ] verify that update notifier is disabled
+- [ ] make scripts less verbose
+- [ ] merge kept-back handler

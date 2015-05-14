@@ -6,5 +6,8 @@ gsettings set com.canonical.Unity.Lenses remote-content-search 'none'
 echo 'show user name in menu bar'
 gsettings set com.canonical.indicator.session show-real-name-on-panel 'true'
 
+echo 'turn off update popup'
+gsettings set com.ubuntu.update-notifier no-show-notifications 'true'
+
 echo 'turn on firewall'
 sudo ufw enable

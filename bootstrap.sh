@@ -15,11 +15,6 @@ then
 	exit 1
 fi
 
-#rm --recursive --force bash-machine-setup/
-#wget --input-file https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt --directory-prefix bash-machine-setup --no-verbose
-#rm --force bash-machine-setup/downloadtargets.txt
-#chmod --recursive +x bash-machine-setup/
-
 ./bash-machine-setup/packages.sh | tee packages.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then

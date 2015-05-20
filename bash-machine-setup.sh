@@ -8,11 +8,8 @@ fi
 
 rm --recursive --force bash-machine-setup/
 wget --input-file https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt --directory-prefix bash-machine-setup --no-verbose
-rm --force bash-machine-setup/downloadtargets.txt
+rm bash-machine-setup/downloadtargets.txt
 chmod --recursive +x bash-machine-setup/
-#rm --force bootstrap.sh
-#wget --no-verbose https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/bootstrap.sh
-#chmod +x bootstrap.sh
 
 ./bash-machine-setup/bootstrap.sh
 ret_code=$?

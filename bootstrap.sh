@@ -15,21 +15,21 @@ then
 	exit 1
 fi
 
-./bash-machine-setup/packages.sh | tee packages.log
+./bash-machine-setup/packages.sh | ./bash-machine-setup/tee packages.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then
 	echo 'packages.sh failed. Please check packages.log'
 	exit 1
 fi
 
-./bash-machine-setup/settings.sh | tee settings.log
+./bash-machine-setup/settings.sh | tee ./bash-machine-setup/settings.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then
 	echo 'settings.sh failed. Please check settings.log'
 	exit 1
 fi
 
-./bash-machine-setup/clojure.sh | tee clojure.log
+./bash-machine-setup/clojure.sh | tee ./bash-machine-setup/clojure.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then
 	echo 'clojure.sh failed. Please check clojure.log'

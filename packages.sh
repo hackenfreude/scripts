@@ -11,6 +11,8 @@ sudo apt-get remove aisleriot brasero cheese deja-dup gnome-mahjongg gnome-sudok
 sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 
+kept_back_packages=$(sudo apt-get upgrade -s | sed -n '/back:/,/upgraded./p' | sed '1d;$d')
+sudo apt-get install $kept_back_packages -y
 
 sudo apt-get install git vim -y
 sudo apt-get install virtualbox-guest-dkms -y

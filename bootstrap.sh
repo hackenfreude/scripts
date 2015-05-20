@@ -15,7 +15,7 @@ then
 	exit 1
 fi
 
-./bash-machine-setup/packages.sh | ./bash-machine-setup/tee packages.log
+./bash-machine-setup/packages.sh | tee ./bash-machine-setup/packages.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then
 	echo 'packages.sh failed. Please check packages.log'

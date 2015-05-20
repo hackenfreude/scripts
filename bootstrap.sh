@@ -15,25 +15,26 @@ then
 	exit 1
 fi
 
-rm --recursive --force scripts/
-wget --input-file https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt --directory-prefix scripts --no-verbose
-chmod --recursive +x scripts/
+#rm --recursive --force bash-machine-setup/
+#wget --input-file https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt --directory-prefix bash-machine-setup --no-verbose
+#rm --force bash-machine-setup/downloadtargets.txt
+#chmod --recursive +x bash-machine-setup/
 
-./scripts/packages.sh | tee packages.log
+./bash-machine-setup/packages.sh | tee packages.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then
 	echo 'packages.sh failed. Please check packages.log'
 	exit 1
 fi
 
-./scripts/settings.sh | tee settings.log
+./bash-machine-setup/settings.sh | tee settings.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then
 	echo 'settings.sh failed. Please check settings.log'
 	exit 1
 fi
 
-./scripts/clojure.sh | tee clojure.log
+./bash-machine-setup/clojure.sh | tee clojure.log
 if [[ ${PIPESTATUS[0]} != 0 ]]
 then
 	echo 'clojure.sh failed. Please check clojure.log'

@@ -13,3 +13,6 @@
 - [ ] verify that update notifier is disabled
 - [x] make scripts less verbose
 - [x] merge kept-back handler
+- [ ] put menus in window title bars
+- [ ] make menu bar smaller
+- [ ] pin terminal to menu bar

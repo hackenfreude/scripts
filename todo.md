@@ -5,11 +5,11 @@
 - [x] figure out version sequencing for virtualbox
 - [x] check for sudo in bootstrap
 - [x] make bootstrapper simpler to always get updated versions
-- [ ] omit download targets from chmod
+- [x] omit download targets from chmod
 - [x] figure out better handling of virtualbox/version check
 - [x] figure out path for clojure
 - [ ] add vimrc
-- [ ] implement better folder structure
+- [x] implement better folder structure
 - [ ] verify that update notifier is disabled
-- [ ] make scripts less verbose
-- [ ] merge kept-back handler
+- [x] make scripts less verbose
+- [x] merge kept-back handler

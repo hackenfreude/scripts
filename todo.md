@@ -8,14 +8,13 @@
 - [x] omit download targets from chmod
 - [x] figure out better handling of virtualbox/version check
 - [x] figure out path for clojure
-- [ ] add vimrc
+- [x] add vimrc
 - [x] implement better folder structure
-- [ ] verify that update notifier is disabled
+- [x] verify that update notifier is disabled
 - [x] make scripts less verbose
 - [x] merge kept-back handler
-- [ ] put menus in window title bars
+- [x] put menus in window title bars
 - [ ] make menu bar smaller
-- [ ] pin terminal to menu bar
 - [x] add user to vboxsf group if exists
 - [ ] run on boot scripts
 - [ ] make shared folder more convenient

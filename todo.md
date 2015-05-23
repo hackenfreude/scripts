@@ -16,3 +16,6 @@
 - [ ] put menus in window title bars
 - [ ] make menu bar smaller
 - [ ] pin terminal to menu bar
+- [x] add user to vboxsf group if exists
+- [ ] run on boot scripts
+- [ ] make shared folder more convenient

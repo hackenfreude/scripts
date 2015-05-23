@@ -11,3 +11,13 @@ gsettings set com.ubuntu.update-notifier no-show-notifications 'true'
 
 echo 'turn on firewall'
 sudo ufw enable
+
+echo 'adding user to virtualbox shared folder group'
+
+vbox_group='vboxsf'
+
+if cat /etc/group | grep ${vbox_group} --only-matching --silent
+then
+	current_user=$(id --user --name)
+	sudo adduser ${current_user} ${vbox_group}
+fi

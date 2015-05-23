@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
-echo 'turn off online search results'
+#turn off online search results
 gsettings set com.canonical.Unity.Lenses remote-content-search 'none'
 
-echo 'show user name in menu bar'
+#show user name in menu bar
 gsettings set com.canonical.indicator.session show-real-name-on-panel 'true'
 
-echo 'turn off update popup'
+#turn off update popup
 gsettings set com.ubuntu.update-notifier no-show-notifications 'true'
 
-echo 'turn on firewall'
+#show menus in title bar
+gsettings set com.canonical.Unity integrated-menus 'true'
+
+#turn on firewall
 sudo ufw enable
 
 vbox_group='vboxsf'

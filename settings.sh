@@ -20,10 +20,11 @@ sudo ufw enable
 
 #add user to shared folders
 vbox_group='vboxsf'
-if cat /etc/group | grep ${vbox_group} --only-matching --silent
+
+if cat /etc/group | grep $vbox_group --only-matching --silent
 then
 	current_user=$(id --user --name)
-	sudo adduser ${current_user} ${vbox_group}
+	sudo adduser $current_user $vbox_group
 fi
 
 #put symlinks to any vbox shared folders onto Desktop
@@ -42,7 +43,7 @@ done
 #add terminal to Unity launcher
 unity_launcher_schema='com.canonical.Unity.Launcher'
 favorites_key='favorites'
-existing_unity_favorites=$(gsettings get ${unity_launcher_schema} ${favorites_key})
+existing_unity_favorites=$(gsettings get $unity_launcher_schema $favorites_key)
 
 terminal_launcher='gnome-terminal.desktop'
 terminal_launcher_path='/usr/share/applications/'${terminal_launcher}
@@ -50,15 +51,15 @@ terminal_launcher_path='/usr/share/applications/'${terminal_launcher}
 favorites_application_prefix='application://'
 favorites_terminal_launcher=${favorites_application_prefix}${terminal_launcher}
 
-if $([ -f ${terminal_launcher_path} ] && $(!(echo ${existing_unity_favorites} | grep ${favorites_terminal_launcher} --silent)))
+if $([ -f ${terminal_launcher_path} ] && $(!(echo $existing_unity_favorites | grep $favorites_terminal_launcher --silent)))
 then
-	existing_applications=($(echo ${existing_unity_favorites} | tr -d '][ ' | tr ',' '\n' | grep ${favorites_application_prefix}))
+	existing_applications=($(echo $existing_unity_favorites | tr -d '][ ' | tr ',' '\n' | grep $favorites_application_prefix))
 	updated_applications=(${existing_applications[*]} "'"${favorites_terminal_launcher}"'")
 	
-	not_applications=($(echo ${existing_unity_favorites} | tr -d '][ ' | tr ',' '\n' | grep ${favorites_application_prefix} --invert-match))
+	not_applications=($(echo $existing_unity_favorites | tr -d '][ ' | tr ',' '\n' | grep $favorites_application_prefix --invert-match))
 	
 	combined=(${updated_applications[*]} ${not_applications[*]})
 	combined_text=$(IFS=, ;echo "[${combined[*]}]")
 	
-	gsettings set ${unity_launcher_schema} ${favorites_key} ${combined_text}
+	gsettings set $unity_launcher_schema $favorites_key $combined_text
 fi

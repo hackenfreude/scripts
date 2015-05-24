@@ -18,3 +18,4 @@
 - [x] add user to vboxsf group if exists
 - [ ] run on boot scripts
 - [ ] make shared folder more convenient
+- [x] add terminal to Unity launcher

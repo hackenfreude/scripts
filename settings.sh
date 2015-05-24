@@ -12,6 +12,9 @@ gsettings set com.ubuntu.update-notifier no-show-notifications 'true'
 #show menus in title bar
 gsettings set com.canonical.Unity integrated-menus 'true'
 
+#set small icons in launcher
+dconf write /org/compiz/profiles/unity/plugins/unityshell/icon-size 20
+
 #turn on firewall
 sudo ufw enable
 

@@ -26,6 +26,19 @@ then
 	sudo adduser ${current_user} ${vbox_group}
 fi
 
+#put symlinks to any vbox shared folders onto Desktop
+mount_path='/media/'
+vbox_mount_prefix='sf_'
+
+dirs=($(tree $mount_path -dfgi -L 1 | grep $vbox_group | grep -E "\<${vbox_mount_prefix}" | tr -d '][' | tr -s ' ' | cut -d ' ' -f 2))
+
+for i in ${dirs[*]}
+do
+	target=$i
+	destination=(${HOME}'/Desktop/'$(echo $i | sed "s|${mount_path}||g"))
+	ln -s -n -f $target $destination
+done
+
 #add terminal to Unity launcher
 unity_launcher_schema='com.canonical.Unity.Launcher'
 favorites_key='favorites'

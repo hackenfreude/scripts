@@ -44,5 +44,5 @@ then
 	combined=(${updated_applications[*]} ${not_applications[*]})
 	combined_text=$(IFS=, ;echo "[${combined[*]}]")
 	
-	gsettings set ${unity_launcher_schema} ${favorites_key} "'"${combined_text}"'"
+	gsettings set ${unity_launcher_schema} ${favorites_key} ${combined_text}
 fi

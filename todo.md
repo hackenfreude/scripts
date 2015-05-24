@@ -14,7 +14,7 @@
 - [x] make scripts less verbose
 - [x] merge kept-back handler
 - [x] put menus in window title bars
-- [ ] make menu bar smaller
+- [x] make menu bar smaller
 - [x] add user to vboxsf group if exists
 - [ ] run on boot scripts
 - [ ] make shared folder more convenient

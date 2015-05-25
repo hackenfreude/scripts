@@ -21,4 +21,5 @@
 - [x] add terminal to Unity launcher
 - [ ] firefox customization
 - [x] git aliases
+- [ ] clean up automount shares and symlinks
 

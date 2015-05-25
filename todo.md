@@ -20,5 +20,5 @@
 - [x] make shared folder more convenient
 - [x] add terminal to Unity launcher
 - [ ] firefox customization
-- [ ] git aliases
+- [x] git aliases
 

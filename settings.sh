@@ -63,3 +63,12 @@ then
 	
 	gsettings set $unity_launcher_schema $favorites_key $combined_text
 fi
+
+#do git customization
+git config --global core.editor vim
+git config --global push.default simple
+git config --global alias.pu push
+git config --global alias.st status
+git config --global alias.co commit
+git config --global alias.ad add
+

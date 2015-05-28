@@ -22,4 +22,5 @@
 - [ ] firefox customization
 - [x] git aliases
 - [ ] clean up automount shares and symlinks
+- [ ] stage vimrc as a real vimrc
 

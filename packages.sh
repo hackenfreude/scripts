@@ -10,10 +10,10 @@ rm --force $logfile
 
 echo 'begin pre-installation package maintenance'
 
-if [ ! $(sudo apt-get autoremove --assume-yes &>> $logfile) ]; then earlyexit 'autoremove'; fi
-if [ ! $(sudo apt-get autoclean --assume-yes &>> $logfile) ]; then earlyexiti 'autoclean'; fi
-if [ ! $(sudo apt-get update --assume-yes &>> $logfile) ]; then earlyexit 'update'; fi
-if [ ! $(sudo apt-get upgrade --assume-yes &>> $logfile) ]; then earlyexit 'upgrade'; fi
+sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit 'autoremove'
+sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit 'autoclean'
+sudo apt-get update --assume-yes &>> $logfile || earlyexit 'update'
+sudo apt-get upgrade --assume-yes &>> $logfile || earlyexit 'upgrade'
 
 #necessary because apt-get may emit a problem to stdout or stderr but still return 0
 preinstall_log_problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)

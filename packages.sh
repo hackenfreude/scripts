@@ -1,25 +1,26 @@
 #!/usr/bin/env bash
 
-logfile='./bash-machine-setup/packages.log'
+function earlyexit {
+	echo "an problem occurred during ${1}"
+	exit 1
+}
 
+logfile='./bash-machine-setup/packages.log'
 rm --force $logfile
 
-echo 'begin pre-installation cleanup of existing packages'
+echo 'begin pre-installation package maintenance'
 
-sudo apt-get autoremove -y &>> $logfile
-sudo apt-get autoclean -y &>> $logfile
-sudo apt-get update -y &>> $logfile
-sudo apt-get upgrade -y &>> $logfile
+if [ ! $(sudo apt-get autoremove --assume-yes &>> $logfile) ]; then earlyexit 'autoremove'; fi
+if [ ! $(sudo apt-get autoclean --assume-yes &>> $logfile) ]; then earlyexiti 'autoclean'; fi
+if [ ! $(sudo apt-get update --assume-yes &>> $logfile) ]; then earlyexit 'update'; fi
+if [ ! $(sudo apt-get upgrade --assume-yes &>> $logfile) ]; then earlyexit 'upgrade'; fi
 
-preinstall_error_count=$(grep --count --extended-regexp '(Err )|(W: )' $logfile)
+#necessary because apt-get may emit a problem to stdout or stderr but still return 0
+preinstall_log_problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)
 
-if [[ $preinstall_error_count != 0 ]]
-then
-	echo 'an error occurred during initial package cleanup and updates'
-	exit 1
-else
-	echo 'pre-installation cleanup succeeded'
-fi
+if [[ $preinstall_log_problem_count != 0 ]]; then earlyexit 'pre-installation package maintenance'; fi
+
+echo 'pre-installation package maintenance succeeded'
 
 echo 'remove unneeded packages'
 sudo apt-get remove aisleriot brasero cheese deja-dup gnome-mahjongg gnome-sudoku gnomine libreoffice-calc libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-ogltrans libreoffice-pdfimport libreoffice-presentation-minimizer libreoffice-style-human libreoffice-writer rhythmbox rhythmbox-plugin-magnatune shotwell simple-scan thunderbird thunderbird-gnome-support totem totem-mozilla unity-webapps-common -y

@@ -5,7 +5,7 @@
 
 function preinstall {
 	stepname='pre-installation package maintenance'
-	echo "begin ${stepname}"
+	echo "----------begin ${stepname}----------" | tee --append $logfile
 	
 	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
 	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
@@ -14,12 +14,12 @@ function preinstall {
 
 	checklog || earlyexit "${stepname}"
 	
-	echo "${stepname} succeeded"
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
 function unneeded {
 	stepname='removing unneeded packages'
-	echo "begin ${stepname}"
+	echo "----------begin ${stepname}----------" | tee --append $logfile
 
 	removal_list='aisleriot brasero cheese deja-dup gnome-mahjongg gnome-sudoku gnomine libreoffice-calc libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-ogltrans libreoffice-pdfimport libreoffice-presentation-minimizer libreoffice-style-human libreoffice-writer rhythmbox rhythmbox-plugin-magnatune shotwell simple-scan thunderbird thunderbird-gnome-support totem totem-mozilla unity-webapps-common'
 
@@ -29,12 +29,12 @@ function unneeded {
 
 	checklog || earlyexit "${stepname}"
 	
-	echo "${stepname} succeeded"
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
 function keptback {
 	stepname='installing kept-back packages'
-	echo "begin ${stepname}"
+	echo "----------begin ${stepname}----------" | tee --append $logfile
 	
 	kept_back_packages=$(sudo apt-get upgrade -s | sed -n '/back:/,/upgraded./p' | sed '1d;$d')
 	
@@ -44,7 +44,7 @@ function keptback {
 
 	checklog || earlyexit "${stepname}"
 	
-	echo "${stepname} succeeded"
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
 function install {
@@ -52,7 +52,7 @@ function install {
 	packages='git vim tree screen'
 	vbox_guest='virtualbox-guest-dkms'
 	
-	echo "begin ${stepname}"
+	echo "----------begin ${stepname}----------" | tee --append $logfile
 
 	sudo apt-get install $packages --assume-yes &>> $logfile || earlyexit "${stepname}: install ${packages}"
 	sudo apt-get install $vbox_guest --assume-yes &>> $logfile || earlyexit "${stepname}: install ${vbox_guest}"
@@ -61,7 +61,7 @@ function install {
 
 	checklog || earlyexit "${stepname}"
 	
-	echo "${stepname} succeeded"
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
 ##### end main functions #####
@@ -82,7 +82,7 @@ function checklog {
 }
 
 function earlyexit {
-	echo "a problem occurred during ${1}"
+	echo "----------a problem occurred during ${1}----------" | tee --append $logfile
 	exit 1
 }
 

@@ -18,6 +18,6 @@ sudo apt-get install $kept_back_packages -y
 sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 
-echo 'install git, vim, tree, and virtualbox guest'
-sudo apt-get install git vim tree -y
+echo 'install git, vim, tree, screen, and virtualbox guest'
+sudo apt-get install git vim tree screen -y
 sudo apt-get install virtualbox-guest-dkms -y

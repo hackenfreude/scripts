@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 
-logfile='packages.log'
+logfile='./bash-machine-setup/packages.log'
 
 rm --force $logfile
+
+echo 'begin pre-installation cleanup of existing packages'
 
 sudo apt-get autoremove -y &>> $logfile
 sudo apt-get autoclean -y &>> $logfile
 sudo apt-get update -y &>> $logfile
 sudo apt-get upgrade -y &>> $logfile
 
-error_count=$(grep --count --extended-regexp '(Err )|(W: )' $logfile)
+preinstall_error_count=$(grep --count --extended-regexp '(Err )|(W: )' $logfile)
 
-if [[$error_count != 0 ]]
+if [[ $preinstall_error_count != 0 ]]
 then
 	echo 'an error occurred during initial package cleanup and updates'
 	exit 1
+else
+	echo 'pre-installation cleanup succeeded'
 fi
 
 echo 'remove unneeded packages'

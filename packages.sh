@@ -23,7 +23,7 @@ function unneeded {
 
 	removal_list='aisleriot brasero cheese deja-dup gnome-mahjongg gnome-sudoku gnomine libreoffice-calc libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-ogltrans libreoffice-pdfimport libreoffice-presentation-minimizer libreoffice-style-human libreoffice-writer rhythmbox rhythmbox-plugin-magnatune shotwell simple-scan thunderbird thunderbird-gnome-support totem totem-mozilla unity-webapps-common'
 
-	sudo apt-get remove $removal_list --assume-yes &>> || earlyexit "${stepname}: remove"
+	sudo apt-get remove $removal_list --assume-yes &>> $logfile || earlyexit "${stepname}: remove"
 	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
 	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 

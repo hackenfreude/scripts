@@ -38,7 +38,7 @@ function keptback {
 	
 	kept_back_packages=$(sudo apt-get upgrade -s | sed -n '/back:/,/upgraded./p' | sed '1d;$d')
 	
-	sudo apt-get install $kept_back_packages --assume-yes &>> || earlyexit "${stepname}: install"
+	sudo apt-get install $kept_back_packages --assume-yes &>> $logfile || earlyexit "${stepname}: install"
 	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
 	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 
@@ -48,14 +48,14 @@ function keptback {
 }
 
 function install {
-	stepname='installing kept-back packages'
+	stepname='installing custom packages'
 	packages='git vim tree screen'
 	vbox_guest='virtualbox-guest-dkms'
-
+	
 	echo "begin ${stepname}"
 
-	sudo apt-get install $packages --assume-yes &>> || earlyexit "${stepname}: install ${packages}"
-	sudo apt-get install $vbox_guest --assume-yes &>> || earlyexit "${stepname}: install ${vbox_guest}"
+	sudo apt-get install $packages --assume-yes &>> $logfile || earlyexit "${stepname}: install ${packages}"
+	sudo apt-get install $vbox_guest --assume-yes &>> $logfile || earlyexit "${stepname}: install ${vbox_guest}"
 	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
 	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 

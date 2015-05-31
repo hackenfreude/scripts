@@ -1,39 +1,40 @@
 #!/usr/bin/env bash
 
-logfile='./bash-machine-setup/packages.log'
-rm --force $logfile
-
-preinstall
-
 function earlyexit {
-	echo "an problem occurred during ${1}"
+	echo "a problem occurred during ${1}"
 	exit 1
 }
 
 function preinstall {
-	echo 'begin pre-installation package maintenance'
+	stepname='pre-installation package maintenance'
+	echo "begin ${stepname}"
 	
-	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit 'autoremove'
-	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit 'autoclean'
-	sudo apt-get update --assume-yes &>> $logfile || earlyexit 'update'
-	sudo apt-get upgrade --assume-yes &>> $logfile || earlyexit 'upgrade'
+	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
+	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
+	sudo apt-get update --assume-yes &>> $logfile || earlyexit "${stepname}: update"
+	sudo apt-get upgrade --assume-yes &>> $logfile || earlyexit "${stepname}: upgrade"
 
-	checklog || earlyexit 'pre-installation package maintenance'
+	checklog || earlyexit "${stepname}"
 	
-	echo 'pre-installation package maintenance succeeded'
+	echo "${stepname} succeeded"
 }
 
-function checklog {
 #necessary because apt-get may emit a problem to stdout or stderr but still return 0
-
+function checklog {
 	problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)
-	if [[ $problem_count != 0]]
+	
+	if [[ $problem_count != 0 ]]
 	then
-		exit 1
+		return 1
+	else
+		return 0
 	fi
 }
 
+logfile='./bash-machine-setup/packages.log'
+rm --force $logfile
 
+preinstall
 
 echo 'remove unneeded packages'
 sudo apt-get remove aisleriot brasero cheese deja-dup gnome-mahjongg gnome-sudoku gnomine libreoffice-calc libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-ogltrans libreoffice-pdfimport libreoffice-presentation-minimizer libreoffice-style-human libreoffice-writer rhythmbox rhythmbox-plugin-magnatune shotwell simple-scan thunderbird thunderbird-gnome-support totem totem-mozilla unity-webapps-common -y

@@ -12,7 +12,7 @@ wget --directory-prefix bash-machine-setup --no-verbose --input-file https://raw
 
 if [[ $? != 0 ]]
 then
-	echo 'There was a problem downloading the scripts. Try again later?'
+	echo 'There was a problem downloading the scripts. Try again later.'
 	exit 1
 fi
 

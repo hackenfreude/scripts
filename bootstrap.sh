@@ -29,8 +29,8 @@ then
 	exit 1
 fi
 
-./bash-machine-setup/clojure.sh | tee ./bash-machine-setup/clojure.log
-if [[ ${PIPESTATUS[0]} != 0 ]]
+./bash-machine-setup/clojure.sh
+if [[ $? != 0 ]]
 then
 	echo 'clojure.sh failed. Please check clojure.log'
 	exit 1

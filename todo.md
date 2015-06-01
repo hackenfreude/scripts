@@ -27,4 +27,5 @@
 - [ ] restructure project
 - [ ] vim plugins
 - [ ] screen setup
+- [ ] DRY on shared script helpers
 

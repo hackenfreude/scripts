@@ -28,4 +28,5 @@
 - [ ] vim plugins
 - [ ] screen setup
 - [ ] DRY on shared script helpers
+- [ ] refactor settings.sh
 

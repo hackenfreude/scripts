@@ -14,6 +14,8 @@ chmod --recursive +x bash-machine-setup/
 ./bash-machine-setup/bootstrap.sh
 ret_code=$?
 
+sudo -k
+
 if [[ $ret_code == 0 ]]
 then
 	echo '***************************************************************************'
@@ -21,6 +23,5 @@ then
 	echo 'Note that a full reboot is needed to make any new $PATH changes permanent'
 	echo 'Until then, force bash to reload to pick up $PATH changes by invoking \"exec -l bash"'
 	echo '***************************************************************************'
-	sudo -k
 fi
 

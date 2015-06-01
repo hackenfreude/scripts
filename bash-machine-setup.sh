@@ -31,5 +31,8 @@ then
 	echo 'Note that a full reboot is needed to make any new $PATH changes permanent'
 	echo 'Until then, force bash to reload to pick up $PATH changes by invoking \"exec -l bash"'
 	echo '***************************************************************************'
+	exit 0
+else
+	exit 1
 fi
 

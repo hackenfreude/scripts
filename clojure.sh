@@ -3,7 +3,7 @@
 
 ##### begin main functions ##### 
 
-function java {
+function getjava {
 	stepname='getting java'
 	echo "----------begin ${stepname}----------" | tee --append $logfile
 	
@@ -15,7 +15,7 @@ function java {
 	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
-function leiningen {
+function getleiningen {
 	stepname='installing leiningen'
 	echo "----------begin ${stepname}----------" | tee --append $logfile
 	
@@ -57,6 +57,6 @@ function earlyexit {
 logfile='./bash-machine-setup/clojure.log'
 rm --force $logfile
 
-java
-leiningen
+getjava
+getleiningen
 

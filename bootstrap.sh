@@ -42,4 +42,5 @@ then
 	echo 'vimrc.sh failed. Please check vimrc.log'
 	exit 1
 fi
+
 exit 0

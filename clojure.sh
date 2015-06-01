@@ -21,7 +21,7 @@ function leiningen {
 	
 	mkdir ~/bin --parents
 	rm ~/bin/lein --force
-	wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein --directory-prefix ~/bin --no-verbose
+	wget --directory-prefix ~/bin --no-verbose https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 	chmod +x ~/bin/lein
 	~/bin/lein &>> $logfile || earlyexit "${stepname}"
 	

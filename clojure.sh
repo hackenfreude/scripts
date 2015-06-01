@@ -53,6 +53,7 @@ function earlyexit {
 ##### end utility functions #####
 
 logfile='./bash-machine-setup/clojure.log'
+rm --force $logfile
 
 java
 lein

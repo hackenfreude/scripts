@@ -7,7 +7,15 @@ then
 fi
 
 rm --recursive --force bash-machine-setup/
-wget --input-file https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt --directory-prefix bash-machine-setup --no-verbose
+
+wget --directory-prefix bash-machine-setup --no-verbose --input-file https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/downloadtargets.txt
+
+if [[ $? != 0 ]]
+then
+	echo 'There was a problem downloading the scripts. Try again later?'
+	exit 1
+fi
+
 rm bash-machine-setup/downloadtargets.txt
 chmod --recursive +x bash-machine-setup/
 

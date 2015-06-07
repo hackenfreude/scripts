@@ -7,13 +7,4 @@ then
 	echo 'the existing version of .vimrc has been backed up as vimrc.OLD. '
 fi
 
-touch ${HOME}/.vimrc
-
-echo -e 'set nocompatible\t"ignore vi compatibility' >> ${HOME}/.vimrc
-echo -e 'set number\t"show line numbers' >> ${HOME}/.vimrc
-echo -e 'set showcmd\t"show last command' >> ${HOME}/.vimrc
-echo -e 'set wildmenu\t"show possible command completion' >> ${HOME}/.vimrc
-echo -e 'set hlsearch\t"highlight all matching results of search' >> ${HOME}/.vimrc
-echo -e 'filetype plugin on\t"enable filetype plugins' >> ${HOME}/.vimrc
-echo -e 'filetype indent on\t"enable filetype indentation' >> ${HOME}/.vimrc
-
+wget --directory-prefix ${HOME} --no-verbose --output-document vimrc https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/vimrc

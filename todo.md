@@ -22,7 +22,7 @@
 - [ ] firefox customization
 - [x] git aliases
 - [ ] clean up automount shares and symlinks
-- [ ] stage vimrc as a real vimrc
+- [x] stage vimrc as a real vimrc
 - [ ] come up with better name
 - [ ] restructure project
 - [ ] vim plugins

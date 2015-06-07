@@ -16,7 +16,6 @@
 - [x] put menus in window title bars
 - [x] make menu bar smaller
 - [x] add user to vboxsf group if exists
-- [ ] run on boot scripts
 - [x] make shared folder more convenient
 - [x] add terminal to Unity launcher
 - [ ] firefox customization

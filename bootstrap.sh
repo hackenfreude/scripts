@@ -36,11 +36,12 @@ then
 	exit 1
 fi
 
-./bash-machine-setup/vimrc.sh | tee ./bash-machine-setup/vimrc.log
-if [[ ${PIPESTATUS[0]} != 0 ]]
+./bash-machine-setup/vimrc.sh
+if [[ $? != 0 ]]
 then
 	echo 'vimrc.sh failed. Please check vimrc.log'
 	exit 1
 fi
 
 exit 0
+

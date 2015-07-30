@@ -5,7 +5,7 @@ function earlyexit {
 	exit 1
 }
 
-logfile='./bash-machine-setup/vimrc.log'
+logfile='./bash-machine-setup/rcfiles.log'
 stepname='downloading vimrc'
 
 echo "----------begin ${stepname}----------" | tee --append $logfile

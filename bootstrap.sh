@@ -36,7 +36,7 @@ then
 	exit 1
 fi
 
-./bash-machine-setup/vimrc.sh
+./bash-machine-setup/rcfiles.sh
 if [[ $? != 0 ]]
 then
 	echo 'vimrc.sh failed. Please check vimrc.log'

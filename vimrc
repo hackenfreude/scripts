@@ -5,3 +5,5 @@ set wildmenu		"show possible command completion
 set hlsearch		"highlight all matching results of search
 filetype plugin on	"enable filetype plugins
 filetype indent on	"enable filetype indentation
+set relativenumber	"magic?
+

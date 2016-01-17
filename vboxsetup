@@ -1,25 +1,12 @@
 #!/usr/bin/env bash
 
-function preinstall {
-	stepname='pre-installation package maintenance'
-	echo "----------begin ${stepname}----------" | tee --append $logfile
-	
-	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
-	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
-	sudo apt-get update --assume-yes &>> $logfile || earlyexit "${stepname}: update"
-	sudo apt-get upgrade --assume-yes &>> $logfile || earlyexit "${stepname}: upgrade"
-
-	checklog || earlyexit "${stepname}"
-	
-	echo "----------${stepname} succeeded----------" | tee --append $logfile
-}
-
 function install {
 	stepname='installing virtualbox-guest-dkms'
 	vbox_guest='virtualbox-guest-dkms'
 	
 	echo "----------begin ${stepname}----------" | tee --append $logfile
 
+	sudo apt-get update --assume-yes &>> $logfile || earlyexit "${stepname}: update"
 	sudo apt-get install $vbox_guest --assume-yes &>> $logfile || earlyexit "${stepname}: install ${vbox_guest}"
 	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
 	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"

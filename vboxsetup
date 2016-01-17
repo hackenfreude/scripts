@@ -46,6 +46,12 @@ function earlyexit {
 	exit 1
 }
 
+if [[ $(id --user) != 0 ]]
+then
+	echo 'You are not running as root. Re-run with sudo.'
+	exit 1
+fi
+
 # X -version sends to stderr rather than stdout, so |& is necessary to pipe it
 current_xserver_version=$(X -version |& grep 'X Server' | grep --only-matching --extended-regexp '([0-9]+(\.)?)+')
 supported_xserver_version='1.15.1'
@@ -62,7 +68,7 @@ then
 fi
 
 logfile="${HOME}/${0}.log"
-rm --force $logfile
+sudo rm --force $logfile
 
 preinstall
 install

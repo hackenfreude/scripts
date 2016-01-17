@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-##### begin main functions ##### 
-
 function preinstall {
 	stepname='pre-installation package maintenance'
 	echo "----------begin ${stepname}----------" | tee --append $logfile
@@ -17,23 +14,8 @@ function preinstall {
 	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
-function keptback {
-	stepname='installing kept-back packages'
-	echo "----------begin ${stepname}----------" | tee --append $logfile
-	
-	kept_back_packages=$(sudo apt-get upgrade -s | sed -n '/back:/,/upgraded./p' | sed '1d;$d')
-	
-	sudo apt-get install $kept_back_packages --assume-yes &>> $logfile || earlyexit "${stepname}: install"
-	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
-	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
-
-	checklog || earlyexit "${stepname}"
-	
-	echo "----------${stepname} succeeded----------" | tee --append $logfile
-}
-
 function install {
-	stepname='installing custom packages'
+	stepname='installing virtualbox-guest-dkms'
 	vbox_guest='virtualbox-guest-dkms'
 	
 	echo "----------begin ${stepname}----------" | tee --append $logfile
@@ -47,13 +29,8 @@ function install {
 	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
-##### end main functions #####
-
-
-##### begin utility functions #####
-
-#necessary because apt-get may emit a problem to stdout or stderr but still return 0
 function checklog {
+#necessary because apt-get may emit a problem to stdout or stderr but still return 0
 	problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)
 	
 	if [[ $problem_count != 0 ]]
@@ -68,10 +45,6 @@ function earlyexit {
 	echo "----------a problem occurred during ${1}----------" | tee --append $logfile
 	exit 1
 }
-
-##### end utility functions #####
-
-
 
 # X -version sends to stderr rather than stdout, so |& is necessary to pipe it
 current_xserver_version=$(X -version |& grep 'X Server' | grep --only-matching --extended-regexp '([0-9]+(\.)?)+')
@@ -92,7 +65,6 @@ logfile='./bash-machine-setup/packages.log'
 rm --force $logfile
 
 preinstall
-keptback
 install
 
 exit 0

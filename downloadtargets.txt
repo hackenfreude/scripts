@@ -1,6 +1,0 @@
-https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/bootstrap.sh
-https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/packages.sh
-https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/settings.sh
-https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/clojure.sh
-https://raw.githubusercontent.com/hackenfreude/bash-machine-setup/master/rcfiles.sh
-

@@ -61,7 +61,7 @@ then
 	exit 1
 fi
 
-logfile='./bash-machine-setup/packages.log'
+logfile="${HOME}/${0}.log"
 rm --force $logfile
 
 preinstall

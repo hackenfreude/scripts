@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 
+logfile="${HOME}/${0}.log"
 
-##### begin main functions ##### 
+function checksudo {
+	if [[ $(id --user) == 0 ]]
+	then
+		echo 'You are running as root. Run this as your normal user; the script will prompt for a password only when necessary.'
+		exit 1
+	fi
+}
+
+function preplogs {
+	sudo rm --force $logfile
+}
 
 function preinstall {
 	stepname='pre-installation package maintenance'
@@ -50,12 +61,10 @@ function keptback {
 function install {
 	stepname='installing custom packages'
 	packages='git vim tree screen'
-	vbox_guest='virtualbox-guest-dkms'
 	
 	echo "----------begin ${stepname}----------" | tee --append $logfile
 
 	sudo apt-get install $packages --assume-yes &>> $logfile || earlyexit "${stepname}: install ${packages}"
-	sudo apt-get install $vbox_guest --assume-yes &>> $logfile || earlyexit "${stepname}: install ${vbox_guest}"
 	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
 	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 
@@ -64,13 +73,8 @@ function install {
 	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
-##### end main functions #####
-
-
-##### begin utility functions #####
-
-#necessary because apt-get may emit a problem to stdout or stderr but still return 0
 function checklog {
+	#necessary because apt-get may emit a problem to stdout or stderr but still return 0
 	problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)
 	
 	if [[ $problem_count != 0 ]]
@@ -86,16 +90,16 @@ function earlyexit {
 	exit 1
 }
 
-##### end utility functions #####
-
-
-
 
 logfile='./bash-machine-setup/packages.log'
 rm --force $logfile
 
+checksudo
+preplogs
 preinstall
 unneeded
 keptback
 install
+
+exit 0
 

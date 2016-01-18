@@ -16,7 +16,7 @@ function preplogs {
 
 function install {
 	stepname='installing git'
-	packages='git'
+	packages='git vim'
 	
 	echo "----------begin ${stepname}----------" | tee --append $logfile
 
@@ -33,7 +33,8 @@ function install {
 function customize {
 	git config --global core.editor vim
 	git config --global push.default simple
-	git config --global alias.pu push
+	git config --global alias.ps push
+	git config --global alias.pl pull
 	git config --global alias.st status
 	git config --global alias.co commit
 	git config --global alias.ad add

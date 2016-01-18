@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 
+logfile="${HOME}/${0}.log"
 
-##### begin main functions ##### 
+function checksudo {
+	if [[ $(id --user) != 0 ]]
+	then
+		echo 'You are not running as root. Re-run with sudo.'
+		exit 1
+	fi
+}
+
+function preplogs {
+	sudo rm --force $logfile
+}
 
 function getjava {
 	stepname='getting java'
@@ -30,13 +41,8 @@ function getleiningen {
 	echo "----------${stepname} succeeded----------" | tee --append $logfile
 }
 
-##### end main functions #####
-
-
-##### begin utility functions #####
-
-#necessary because apt-get may emit a problem to stdout or stderr but still return 0
 function checklog {
+	#necessary because apt-get may emit a problem to stdout or stderr but still return 0
 	problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)
 	
 	if [[ $problem_count != 0 ]]
@@ -54,9 +60,11 @@ function earlyexit {
 
 ##### end utility functions #####
 
-logfile='./bash-machine-setup/clojure.log'
-rm --force $logfile
 
+checksudo
+preplogs
 getjava
 getleiningen
+
+exit 0
 

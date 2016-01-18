@@ -6,3 +6,5 @@ gsettings set com.canonical.Unity.Lenses remote-content-search 'none'
 #turn on firewall
 sudo ufw enable
 
+exit 0
+

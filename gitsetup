@@ -60,6 +60,7 @@ function earlyexit {
 checksudo
 preplogs
 install
+customize
 
 exit 0
 

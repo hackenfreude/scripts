@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+logfile="${HOME}/${0}.log"
+
 function checksudo {
 	if [[ $(id --user) != 0 ]]
 	then
@@ -7,6 +9,11 @@ function checksudo {
 		exit 1
 	fi
 }
+
+function preplogs {
+	sudo rm --force $logfile
+}
+
 
 function checkcompatibility {
 	# X -version sends to stderr rather than stdout, so |& is necessary to pipe it
@@ -58,10 +65,8 @@ function earlyexit {
 	exit 1
 }
 
-logfile="${HOME}/${0}.log"
-sudo rm --force $logfile
-
 checksudo
+preplogs
 checkcompatibility
 install
 

@@ -58,9 +58,6 @@ function earlyexit {
 	exit 1
 }
 
-##### end utility functions #####
-
-
 checksudo
 preplogs
 getjava

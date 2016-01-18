@@ -17,7 +17,6 @@ function preplogs {
 function install {
 	stepname='installing git'
 	packages='git'
-	vbox_guest='virtualbox-guest-dkms'
 	
 	echo "----------begin ${stepname}----------" | tee --append $logfile
 

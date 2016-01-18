@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [[ $(id --user) != 0 ]]
+then
+	echo 'You are not running as root. Re-run with sudo.'
+	exit 1
+fi
+
 #turn off online search results
 gsettings set com.canonical.Unity.Lenses remote-content-search 'none'
 

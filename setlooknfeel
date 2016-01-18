@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [[ $(id --user) == 0 ]]
+then
+	echo 'You are running as root. Re-run as your normal user.'
+	exit 1
+fi
+
 #show user name in menu bar
 gsettings set com.canonical.indicator.session show-real-name-on-panel 'true'
 
@@ -35,4 +41,6 @@ then
 	
 	gsettings set $unity_launcher_schema $favorites_key $combined_text
 fi
+
+exit 0
 

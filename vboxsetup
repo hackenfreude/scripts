@@ -49,7 +49,7 @@ function install {
 }
 
 function checklog {
-#necessary because apt-get may emit a problem to stdout or stderr but still return 0
+	#necessary because apt-get may emit a problem to stdout or stderr but still return 0
 	problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)
 	
 	if [[ $problem_count != 0 ]]

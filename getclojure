@@ -39,6 +39,7 @@ function getleiningen {
 	~/bin/lein &>> $logfile || earlyexit "${stepname}: executing"
 	
 	echo "----------${stepname} succeeded----------" | tee --append $logfile
+	echo 'NOTE: lein is now on your $PATH, but this requires a restart to take effect.'
 }
 
 function checklog {

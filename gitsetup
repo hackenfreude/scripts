@@ -22,8 +22,6 @@ function install {
 
 	sudo apt-get update --assume-yes &>> $logfile || earlyexit "${stepname}: update"
 	sudo apt-get install $packages --assume-yes &>> $logfile || earlyexit "${stepname}: install ${packages}"
-	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
-	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 
 	checklog || earlyexit "${stepname}"
 	

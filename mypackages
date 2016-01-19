@@ -35,8 +35,6 @@ function unneeded {
 	removal_list='aisleriot brasero cheese deja-dup gnome-mahjongg gnome-sudoku gnomine libreoffice-calc libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-ogltrans libreoffice-pdfimport libreoffice-presentation-minimizer libreoffice-style-human libreoffice-writer rhythmbox rhythmbox-plugin-magnatune shotwell simple-scan thunderbird thunderbird-gnome-support totem totem-mozilla unity-webapps-common'
 
 	sudo apt-get remove $removal_list --assume-yes &>> $logfile || earlyexit "${stepname}: remove"
-	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
-	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 
 	checklog || earlyexit "${stepname}"
 	
@@ -50,8 +48,6 @@ function keptback {
 	kept_back_packages=$(sudo apt-get upgrade -s | sed -n '/back:/,/upgraded./p' | sed '1d;$d')
 	
 	sudo apt-get install $kept_back_packages --assume-yes &>> $logfile || earlyexit "${stepname}: install"
-	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
-	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 
 	checklog || earlyexit "${stepname}"
 	
@@ -65,6 +61,16 @@ function install {
 	echo "----------begin ${stepname}----------" | tee --append $logfile
 
 	sudo apt-get install $packages --assume-yes &>> $logfile || earlyexit "${stepname}: install ${packages}"
+
+	checklog || earlyexit "${stepname}"
+	
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
+}
+
+function cleanup {
+	stepname='post-installation package maintenance'
+	echo "----------begin ${stepname}----------" | tee --append $logfile
+	
 	sudo apt-get autoremove --assume-yes &>> $logfile || earlyexit "${stepname}: autoremove"
 	sudo apt-get autoclean --assume-yes &>> $logfile || earlyexit "${stepname}: autoclean"
 
@@ -100,6 +106,7 @@ preinstall
 unneeded
 keptback
 install
+cleanup
 
 exit 0
 

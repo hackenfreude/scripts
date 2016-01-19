@@ -96,10 +96,6 @@ function earlyexit {
 	exit 1
 }
 
-
-logfile='./bash-machine-setup/packages.log'
-rm --force $logfile
-
 checksudo
 preplogs
 preinstall

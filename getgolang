@@ -16,7 +16,7 @@ function preplogs {
 }
 
 function getgo {
-	wget -q https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz - O - | tar -C /usr/local -x
+	wget https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz -q -O - | tar -C /usr/local -x
 }
 
 function earlyexit {

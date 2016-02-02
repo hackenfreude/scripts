@@ -28,6 +28,7 @@ function setpath {
 function makework {
 	mkdir -p $HOME/learngo
 	echo 'export GOPATH=$HOME/learngo' >> $HOME/.profile
+	mkdir -p $HOME/learngo/src
 }
 
 function earlyexit {

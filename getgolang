@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+logfile="${HOME}/${0}.log"
+GO_VERSION='1.5.3'
+
+function checksudo {
+	if [[ $(id --user) == 0 ]]
+	then
+		echo 'You are running as root. Run this as your normal user; the script will prompt for a password only when necessary.'
+		exit 1
+	fi
+}
+
+function preplogs {
+	sudo rm --force $logfile
+}
+
+function getgo {
+	wget -q https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz - O - | tar -C /usr/local -x
+}
+
+function earlyexit {
+	echo "----------a problem occurred during ${1}----------" | tee --append $logfile
+	exit 1
+}
+
+checksudo
+preplogs
+getgo
+
+exit 0
+

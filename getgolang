@@ -21,6 +21,10 @@ function getgo {
 	wget https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz -q -O - | sudo tar -C /usr/local -xvz | tee --append $logfile
 }
 
+function setpath {
+	echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
+}
+
 function earlyexit {
 	echo "----------a problem occurred during ${1}----------" | tee --append $logfile
 	exit 1
@@ -29,6 +33,7 @@ function earlyexit {
 checksudo
 preplogs
 getgo
+setpath
 
 exit 0
 

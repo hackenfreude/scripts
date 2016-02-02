@@ -16,7 +16,9 @@ function preplogs {
 }
 
 function getgo {
-	wget https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz -q -O - | sudo tar -C /usr/local -xz
+	stepname='getting golang'
+	echo "----------begin ${stepname}----------" | tee --append $logfile
+	wget https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz -q -O - | sudo tar -C /usr/local -xvz | tee --append $logfile
 }
 
 function earlyexit {

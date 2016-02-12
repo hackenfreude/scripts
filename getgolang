@@ -26,9 +26,12 @@ function setpath {
 }
 
 function makework {
-	mkdir -p $HOME/learngo
-	echo 'export GOPATH=$HOME/learngo' >> $HOME/.profile
-	mkdir -p $HOME/learngo/src
+	mkdir -p $HOME/go
+	echo 'export GOPATH=$HOME/go' >> $HOME/.profile
+	mkdir -p $HOME/go/src
+	mkdir -p $HOME/go/bin
+	mkdir -p $HOME/go/pkg
+	echo 'export PATH=$PATH:$HOME/go/src' >> $HOME/.profile
 }
 
 function earlyexit {

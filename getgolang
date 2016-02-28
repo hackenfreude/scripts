@@ -34,6 +34,10 @@ function makework {
 	echo 'export PATH=$PATH:$HOME/go/src' >> $HOME/.profile
 }
 
+function enablevendor {
+	echo 'export GO15VENDOREXPERIMENT=1' >> $HOME/.profile
+}
+
 function earlyexit {
 	echo "----------a problem occurred during ${1}----------" | tee --append $logfile
 	exit 1
@@ -44,6 +48,7 @@ preplogs
 getgo
 setpath
 makework
+enablevendor
 
 exit 0
 

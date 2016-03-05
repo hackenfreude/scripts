@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 logfile="${HOME}/${0}.log"
-GO_VERSION='1.5.3'
+GO_VERSION='1.6'
 
 function checksudo {
 	if [[ $(id --user) == 0 ]]

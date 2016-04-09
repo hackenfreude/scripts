@@ -20,7 +20,7 @@ function preplogs {
 }
 
 function checkversion {
-	current_ubuntu_version=$(lsb_release -r)
+	current_ubuntu_version=$(lsb_release -r | grep --only-matching --extended-regexp '([0-9]+(\.)?)+')
 
 	if [[ "${current_ubuntu_version}" != "${SUPPORTED_UBUNTU_VERSION}" ]]
 	then

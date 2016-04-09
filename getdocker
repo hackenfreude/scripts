@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+DOCKER_SOURCES='/etc/apt/sources.list.d/docker.list'
+DOCKER_REPO='deb https://apt.dockerproject.org/repo ubuntu-trusty main'
+DOCKER_PACKAGE='lxc-docker'
+SUPPORTED_UBUNTU_VERSION='14.04'
+
+logfile="${HOME}/${0}.log"
+
+function checksudo {
+	if [[ $(id --user) == 0 ]]
+	then
+		echo 'You are running as root. Run this as your normal user; the script will prompt for a password only when necessary.'
+		exit 1
+	fi
+}
+
+function preplogs {
+	sudo rm --force $logfile
+}
+
+function checkversion {
+	current_ubuntu_version=$(lsb_release -r)
+
+	if [[ "${current_ubuntu_version}" != "${SUPPORTED_UBUNTU_VERSION}" ]]
+	then
+		echo "This script is designed to install Docker on Ubuntu $SUPPORTED_UBUNTU_VERSION only."
+		echo "You are running Ubuntu $current_ubuntu_version."
+		exit 1
+	fi
+}
+
+function certificates {
+	stepname='update apt certificates'
+	echo "----------begin ${stepname}----------" | tee --append $logfile
+	
+	cert_packages='apt-transport-https ca-certificates'
+
+	sudo apt-get update --assume-yes &>> $logfile || earlyexit "${stepname}: update"
+	sudo apt-get install $cert_packages --assume-yes &>> $logfile || earlyexit "${stepname}: install"
+
+	checklog || earlyexit "${stepname}"
+	
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
+}
+
+function gpgkey {
+	stepname='get gpg key'
+	echo "----------begin ${stepname}----------" | tee --append $logfile
+
+	sudo apt-key adv --keyserver 'hkp://p80.pool.sks-keyservers.net:80' --recv-keys '58118E89F3A912897C070ADBF76221572C52609D' &>> $logfile || earlyexit "${stepname}: install key"
+	checklog || earlyexit "${stepname}"
+
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
+}
+
+function sources {
+	stepname='update sources'
+	echo "----------begin ${stepname}----------" | tee --append $logfile
+
+	sudo rm --force $DOCKER_SOURCES || earlyexit "${stepname}: remove old sources"
+	sudo touch $DOCKER_SOURCES || earlyexit "${stepname}: create new sources"
+	echo $DOCKER_REPO | sudo tee $DOCKER_SOURCES || earlyexit "${stepname}: write new sources"
+	
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
+}
+
+function cycle {
+	stepname='cycle sources'
+	echo "----------begin ${stepname}----------" | tee --append $logfile
+
+	sudo apt-get update --assume-yes &>> $logfile || earlyexit "${stepname}: update"
+	sudo apt-get purge --assume-yes $DOCKER_PACKAGE &>> $logfile || earlyexit "${stepname}: purge"
+
+	checklog || earlyexit "${stepname}"
+
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
+}
+
+function prereqs {
+	stepname='install prereqs'
+	echo "----------begin ${stepname}----------" | tee --append $logfile
+
+	sudo apt-get update --assume-yes &>> $logfile || earlyexit "${stepname}: update"
+	sudo apt-get install linux-image-extra-$(uname -r) --assume-yes &>> $logfile || earlyexit "${stepname}: install linux image extras"
+	sudo apt-get install apparmor --assume-yes &>> $logfile || earlyexit "${stepname}: install apparmor"
+
+	checklog || earlyexit "${stepname}"
+
+	echo "----------${stepname} succeeded----------" | tee --append $logfile
+}
+
+function checklog {
+	#necessary because apt-get may emit a problem to stdout or stderr but still return 0
+	problem_count=$(grep --count --extended-regexp '(Err )|(W: )|(E: )' $logfile)
+	
+	if [[ $problem_count != 0 ]]
+	then
+		return 1
+	else
+		return 0
+	fi
+}
+
+function earlyexit {
+	echo "----------a problem occurred during ${1}----------" | tee --append $logfile
+	exit 1
+}
+
+checksudo
+preplogs
+checkversion
+certificates
+gpgkey
+sources
+cycle
+prereqs
+
+exit 0
+
